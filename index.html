@@ -548,12 +548,22 @@
       color: #fff;
       text-align: left;
       padding: 7px 10px;
+      border-right: 1px solid rgba(255, 255, 255, 0.35);
+    }
+
+    table.cheat-table thead th:last-child {
+      border-right: none;
     }
 
     table.cheat-table td {
       padding: 6px 10px;
       border-bottom: 1px solid var(--border);
+      border-right: 1px solid var(--border);
       color: var(--ink-soft);
+    }
+
+    table.cheat-table td:last-child {
+      border-right: none;
     }
 
     table.cheat-table tr:nth-child(even) td {
@@ -911,6 +921,8 @@
     <button data-chapter="5">Chapter 5</button>
     <button data-chapter="6">Chapter 6</button>
     <button data-chapter="7">Chapter 7</button>
+    <button data-chapter="8">Chapter 8</button>
+    <button data-chapter="9">Chapter 9</button>
   </div>
 
   <div class="layout">
@@ -1018,15 +1030,18 @@
         </div>
 
         <div class="fcard" id="f-4-0" data-chapter="4">
+          <div class="ftitle">Expected Return E(R) — With Probability</div>
           <div class="formula-box">E(R) = Σ [ x · P(x) ]</div>
         </div>
 
         <div class="fcard" id="f-4-1" data-chapter="4">
-          <div class="formula-box"><span class="sqrt"><span class="sqrt-sign">√</span><span class="sqrt-content">Σ ( x −
+          <div class="ftitle">Standard Deviation (σ) — With Probability</div>
+          <div class="formula-box">σ = <span class="sqrt"><span class="sqrt-sign">√</span><span class="sqrt-content">Σ ( x −
                 x̄ )<sup>2</sup> · P(x)</span></span></div>
         </div>
 
         <div class="fcard" id="f-4-2" data-chapter="4">
+          <div class="ftitle">Coefficient of Variation (CV) — With Probability</div>
           <div class="formula-box">CV = <span class="frac"><span class="num">σ</span><span
                 class="den">E(R)</span></span>
             × 100</div>
@@ -1072,18 +1087,21 @@
         </div>
 
         <div class="fcard" id="f-4-3" data-chapter="4">
+          <div class="ftitle">Expected Return E(R) — Without Probability</div>
           <div class="formula-box">E(R) = <span class="frac"><span class="num">Σx.P(x)</span><span
                 class="den">N</span></span>
           </div>
         </div>
 
         <div class="fcard" id="f-4-4" data-chapter="4">
-          <div class="formula-box"><span class="sqrt"><span class="sqrt-sign">√</span><span class="sqrt-content"><span
+          <div class="ftitle">Standard Deviation (σ) — Without Probability</div>
+          <div class="formula-box">σ = <span class="sqrt"><span class="sqrt-sign">√</span><span class="sqrt-content"><span
                   class="frac"><span class="num">Σ(x−x̄)²</span><span class="den">N −
                     1</span></span></span></span></div>
         </div>
 
         <div class="fcard" id="f-4-5" data-chapter="4">
+          <div class="ftitle">Coefficient of Variation (CV) — Without Probability</div>
           <div class="formula-box">CV = <span class="frac"><span class="num">σ</span><span
                 class="den">E(R)</span></span>
             ×
@@ -1099,7 +1117,6 @@
             <table class="cheat-table">
               <thead>
                 <tr>
-                  <th>Year</th>
                   <th>P(x)</th>
                   <th>(x−x̄)ₐ</th>
                   <th>(x−x̄)ᵦ</th>
@@ -1114,7 +1131,6 @@
                   <td>&nbsp;</td>
                   <td>&nbsp;</td>
                   <td>&nbsp;</td>
-                  <td>&nbsp;</td>
                 </tr>
                 <tr>
                   <td>&nbsp;</td>
@@ -1122,10 +1138,8 @@
                   <td>&nbsp;</td>
                   <td>&nbsp;</td>
                   <td>&nbsp;</td>
-                  <td>&nbsp;</td>
                 </tr>
                 <tr>
-                  <td>&nbsp;</td>
                   <td>&nbsp;</td>
                   <td>&nbsp;</td>
                   <td>&nbsp;</td>
@@ -1138,6 +1152,7 @@
         </div>
 
         <div class="fcard" id="f-4-6" data-chapter="4">
+          <div class="ftitle">Covariance Cov(x,y) — With Probability</div>
           <div class="formula-box">Cov(x,y) = Σ [ ( x − x̄ )( y − ȳ ) · P(x) ]</div>
         </div>
       </div>
@@ -1180,6 +1195,7 @@
         </div>
 
         <div class="fcard" id="f-4-7" data-chapter="4">
+          <div class="ftitle">Covariance Cov(x,y) — Without Probability</div>
           <div class="formula-box">Cov(x,y) = <span class="frac"><span class="num">Σ ( x − x̄ )( y − ȳ )</span><span
                 class="den">N</span></span></div>
         </div>
@@ -1509,6 +1525,216 @@
         <div class="ftitle">Terminal Value (P<sub>n</sub>)</div>
         <div class="formula-box">P<sub>n</sub> = <span class="frac"><span class="num">D<sub>n−1</sub></span><span
               class="den">k<sub>e</sub> − g</span></span></div>
+      </div>
+
+      <div class="chapter-heading" data-chapter="8">Chapter 8: Investment Decisions (Capital Budgeting)</div>
+
+      <div class="gnote-box" data-chapter="8">
+        <div class="gnote-title">📌 Overview</div>
+        <ul>
+          <li>মূল ৬টি কৌশল (Technique): <b>PBP</b> (Payback Period), <b>ARR</b> (Accounting/Average Rate of
+            Return), <b>ROI</b> (Return on Investment), <b>NPV</b> (Net Present Value), <b>PI</b> (Profitability
+            Index), <b>IRR</b> (Internal Rate of Return)।</li>
+          <li>সব কৌশলের আগে প্রথমে <b>CFAT (Cash Flow After Tax)</b> এর টেবিল বানাতে হয় — নিচের ধাপ অনুযায়ী।</li>
+          <li>যদি প্রশ্নে সরাসরি <b>CFAT</b> দেওয়া থাকে, তাহলে Dep/EBT/Tax/EAT বের করার দরকার নেই — সরাসরি CFAT
+            দিয়েই কাজ করা যাবে। যদি <b>CFBT (Cash Flow Before Tax)</b> ও Tax Rate দেওয়া থাকে, তাহলে পুরো টেবিল
+            (Dep → EBT → Tax → EAT → CFAT) বানাতে হবে।</li>
+        </ul>
+      </div>
+
+      <div class="subgroup-heading" data-chapter="8">Step 1: Cash Flow (CFAT) Table তৈরি</div>
+
+      <div class="fcard" id="chart-8-0" data-chapter="8">
+        <div class="ftitle">CFAT Calculation Table</div>
+        <div class="cheat-wrap">
+          <div class="table-scroll">
+            <table class="cheat-table">
+              <thead>
+                <tr>
+                  <th>Year</th>
+                  <th>CFBT</th>
+                  <th>Dep</th>
+                  <th>EBT<br>(CFBT − Dep)</th>
+                  <th>Tax</th>
+                  <th>EAT<br>(EBT − Tax)</th>
+                  <th>CFAT<br>(EAT + Dep)</th>
+                  <th>Cumulative<br>CFAT</th>
+                  <th>PV / FV Factor<br>(Rate of Return)</th>
+                  <th>Total PV<br>(CFAT × Factor)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td><b>Total=</b></td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td><b>Total PV=</b></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="fusage"><b>কখন ব্যবহার হবে:</b> প্রতিটা বছরের CFAT বের করার জন্য এই টেবিল বানানো হয়। CFAT বের হয়ে
+          গেলে সেটা দিয়েই বাকি সব কৌশল (PBP, NPV, PI, IRR ইত্যাদি) হিসাব করা হয়।</div>
+      </div>
+
+      <div class="fcard" id="f-8-0" data-chapter="8">
+        <div class="ftitle">Depreciation (Straight Line Method)</div>
+        <div class="formula-box">Dep = <span class="frac"><span class="num">Total Cost − SV</span><span
+              class="den">Lifetime</span></span></div>
+        <div class="fnote">📝 <b>SV</b> = Salvage Value (মেয়াদ শেষে সম্পদের অবশিষ্ট মূল্য)।</div>
+      </div>
+
+      <div class="subgroup-heading" data-chapter="8">Step 2: Investment Decision Techniques</div>
+
+      <div class="fcard" id="f-8-1" data-chapter="8">
+        <div class="ftitle">Payback Period (PBP)</div>
+        <div class="formula-box">PBP = A + <span class="frac"><span class="num">NCO − C</span><span
+              class="den">D</span></span></div>
+        <div class="fnote">📝 <b>NCO</b> = Total Cost + Working Capital (WC) &nbsp;|&nbsp; <b>A</b> = যে বছরের
+          Cumulative CFAT, NCO-এর সমান বা কম (শেষ বছর যেখানে পুরো টাকা এখনো ফেরত আসেনি) &nbsp;|&nbsp; <b>C</b> = A
+          বছর পর্যন্ত Cumulative CFAT &nbsp;|&nbsp; <b>D</b> = A-এর পরের বছরের CFAT।</div>
+      </div>
+
+      <div class="fcard" id="f-8-2" data-chapter="8">
+        <div class="ftitle">Return on Investment (ROI)</div>
+        <div class="formula-box">ROI = <span class="frac"><span class="num">Average EAT</span><span
+              class="den">NCO</span></span> × 100%</div>
+      </div>
+
+      <div class="fcard" id="f-8-3" data-chapter="8">
+        <div class="ftitle">Accounting / Average Rate of Return (ARR)</div>
+        <div class="formula-box">ARR = <span class="frac"><span class="num">Average EAT</span><span
+              class="den">Average Investment</span></span> × 100</div>
+        <div class="formula-box">Average Investment = WC + SV + <span class="frac"><span
+              class="num">Investment − SV</span><span class="den">2</span></span></div>
+      </div>
+
+      <div class="fcard" id="f-8-4" data-chapter="8">
+        <div class="ftitle">Net Present Value (NPV)</div>
+        <div class="formula-box">NPV = Total PV − NCO</div>
+        <div class="fnote">📝 Decision: NPV <b>(+)</b> হলে গ্রহণ (Accept) করা হবে, NPV <b>(−)</b> হলে বাতিল (Reject)
+          করা হবে — নাহলে (একাধিক প্রজেক্ট থাকলে) তুলনা (Compare) করে যেটার NPV বেশি সেটা নেওয়া হবে।</div>
+      </div>
+
+      <div class="fcard" id="f-8-5" data-chapter="8">
+        <div class="ftitle">Profitability Index (PI)</div>
+        <div class="formula-box">PI = <span class="frac"><span class="num">Total PV</span><span
+              class="den">NCO</span></span></div>
+      </div>
+
+      <div class="fcard" id="f-8-6" data-chapter="8">
+        <div class="ftitle">Internal Rate of Return (IRR)</div>
+        <div class="formula-box">IRR = L + <span class="frac"><span class="num">P</span><span
+              class="den">P − N</span></span> ( H − L )</div>
+        <div class="fnote">📝 <b>L</b> = Low Rate (%) &nbsp;|&nbsp; <b>H</b> = High Rate (%) &nbsp;|&nbsp;
+          <b>P</b> = Low Rate-এর NPV (৳) &nbsp;|&nbsp; <b>N</b> = High Rate-এর NPV (৳)।</div>
+        <div class="fusage"><b>কিভাবে বের করবে:</b> Extra একটা 4-column টেবিল বানাতে হবে (Year, CFAT, PV Factor,
+          Total PV) — দুইটা ভিন্ন Rate ধরে। একটা Rate-এ PV Factor বেশি ধরে NPV <b>(+)</b> বের করতে হবে, আরেকটা
+          Rate-এ PV Factor কম ধরে NPV <b>(−)</b> বের করতে হবে (সাধারণত 1–2% বা 10–15% ব্যবধানে ট্রায়াল দেওয়া হয়)।
+          একটা (+) আর একটা (−) NPV না আসা পর্যন্ত trial চালিয়ে যেতে হবে, তারপর উপরের ফর্মুলায় বসিয়ে interpolate
+          করতে হবে।</div>
+      </div>
+
+      <div class="chapter-heading" data-chapter="9">Chapter 9: Capital Structure Decision</div>
+
+      <div class="subgroup-heading" data-chapter="9">Step 1: Income Statement (EBIT − EBT বের করার জন্য)</div>
+
+      <div class="fcard" id="chart-9-0" data-chapter="9">
+        <div class="ftitle">Proforma Income Statement</div>
+        <div class="cheat-wrap">
+          <div class="table-scroll">
+            <table class="cheat-table">
+              <thead>
+                <tr>
+                  <th>Particulars</th>
+                  <th>Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Sales</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>Less: VC (Variable Cost)</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td><b>Contribution Margin</b></td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>Less: Fixed Cost</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td><b>EBIT</b></td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>Less: Interest</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td><b>EBT</b></td>
+                  <td>&nbsp;</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="fusage"><b>কখন ব্যবহার হবে:</b> Leverage (DOL, DFL, DCL) বের করার আগে এই Income Statement বানিয়ে
+          Contribution Margin, EBIT ও EBT বের করতে হয়।</div>
+      </div>
+
+      <div class="subgroup-heading" data-chapter="9">Step 2: Leverage Analysis</div>
+
+      <div class="fcard" id="f-9-0" data-chapter="9">
+        <div class="ftitle">Degree of Operating Leverage (DOL)</div>
+        <div class="formula-box">DOL = <span class="frac"><span class="num">Contribution</span><span
+              class="den">EBIT</span></span></div>
+      </div>
+
+      <div class="fcard" id="f-9-1" data-chapter="9">
+        <div class="ftitle">Degree of Financial Leverage (DFL)</div>
+        <div class="formula-box">DFL = <span class="frac"><span class="num">EBIT</span><span
+              class="den">EBT</span></span></div>
+      </div>
+
+      <div class="fcard" id="f-9-2" data-chapter="9">
+        <div class="ftitle">Degree of Combined Leverage (DCL)</div>
+        <div class="formula-box">DCL = DOL × DFL</div>
       </div>
     </div>
 
