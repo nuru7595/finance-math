@@ -1,0 +1,1555 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finance — Formula Sheet</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#7a1f2b">
+  <style>
+    :root {
+      --maroon: #7a1f2b;
+      --maroon-dark: #5c1620;
+      --gold: #c8973a;
+      --cream: #faf6ef;
+      --paper: #fffdf9;
+      --ink: #2a2320;
+      --ink-soft: #5a5049;
+      --border: #e8ddc9;
+      --green: #2f6b4f;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Noto Sans Bengali", "Hind Siliguri", "SolaimanLipi", "Vrinda", "Nirmala UI", "Kalpurush", system-ui, sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.55;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    .toc-num {
+      font-family: "Noto Serif Bengali", "Noto Sans Bengali", "Hind Siliguri", serif;
+    }
+
+    header.top {
+      background: linear-gradient(135deg, var(--maroon), var(--maroon-dark));
+      color: #fdf3e7;
+      padding: 10px 16px;
+      text-align: center;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.15);
+    }
+
+    header.top h1 {
+      margin: 0;
+      font-size: 1.25rem;
+      letter-spacing: 0.3px;
+    }
+
+    .controls {
+      background: var(--paper);
+      border-bottom: 2px solid var(--border);
+      padding: 6px 12px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .controls input[type="text"] {
+      flex: 1 1 220px;
+      max-width: 340px;
+      padding: 7px 12px;
+      border-radius: 8px;
+      border: 1.5px solid var(--border);
+      font-family: inherit;
+      font-size: 0.85rem;
+      outline: none;
+      background: #fff;
+    }
+
+    .controls input[type="text"]:focus {
+      border-color: var(--maroon);
+    }
+
+    .controls button {
+      padding: 7px 12px;
+      border-radius: 8px;
+      border: 1.5px solid var(--maroon);
+      background: #fff;
+      color: var(--maroon);
+      font-family: inherit;
+      font-weight: 600;
+      font-size: 0.78rem;
+      cursor: pointer;
+      transition: 0.15s;
+    }
+
+    .controls button:hover {
+      background: var(--maroon);
+      color: #fff;
+    }
+
+    .chapter-filter {
+      background: var(--paper);
+      border-bottom: 2px solid var(--border);
+      padding: 6px 10px;
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chapter-filter button {
+      padding: 5px 12px;
+      border-radius: 20px;
+      border: 1.5px solid var(--border);
+      background: #fbf4e6;
+      color: var(--ink-soft);
+      font-family: inherit;
+      font-weight: 600;
+      font-size: 0.76rem;
+      cursor: pointer;
+      transition: 0.15s;
+      white-space: nowrap;
+    }
+
+    .chapter-filter button:hover {
+      border-color: var(--maroon);
+      color: var(--maroon-dark);
+    }
+
+    .chapter-filter button.active {
+      background: var(--maroon);
+      border-color: var(--maroon);
+      color: #fff;
+    }
+
+    .layout {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 12px 14px;
+    }
+
+    details.toc-wrap {
+      background: var(--paper);
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      margin-bottom: 14px;
+      padding: 4px 14px;
+    }
+
+    details.toc-wrap>summary {
+      cursor: pointer;
+      font-weight: 700;
+      padding: 10px 0;
+      color: var(--maroon-dark);
+      font-size: 1.05rem;
+      list-style: none;
+    }
+
+    details.toc-wrap>summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .toc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 8px;
+      padding-bottom: 16px;
+    }
+
+    .toc-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--ink);
+      background: #fbf4e6;
+      border: 1px solid var(--border);
+      font-size: 0.85rem;
+      transition: 0.15s;
+    }
+
+    .toc-item:hover {
+      background: #f3e5c8;
+    }
+
+    #resetDone {
+      border-color: var(--ink-soft);
+      color: var(--ink-soft);
+    }
+
+    #resetDone:hover {
+      background: var(--ink-soft);
+      color: #fff;
+    }
+
+    .progress-wrap {
+      max-width: 1100px;
+      margin: 10px auto 0;
+      padding: 0 16px;
+    }
+
+    .progress-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--maroon-dark);
+      margin-bottom: 6px;
+    }
+
+    .progress-track {
+      background: var(--border);
+      border-radius: 20px;
+      height: 10px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--green), #4a9d74);
+      border-radius: 20px;
+      transition: width 0.3s ease;
+    }
+
+    .done-check {
+      flex-shrink: 0;
+      width: 17px;
+      height: 17px;
+      cursor: pointer;
+      accent-color: var(--green);
+    }
+
+    .toc-item.is-done {
+      background: #e9f3ec;
+      border-color: #bfe0cc;
+    }
+
+    .toc-item.is-done .toc-text {
+      text-decoration: line-through;
+      color: var(--ink-soft);
+    }
+
+    .qcard.is-done>.qsummary {
+      background: #e9f3ec;
+    }
+
+    .qcard.is-done>.qsummary .qtext {
+      text-decoration: line-through;
+      color: var(--ink-soft);
+    }
+
+    .done-bottom-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      margin-top: 10px;
+      padding: 10px 14px;
+      background: #e9f3ec;
+      border: 1.5px solid #bfe0cc;
+      border-radius: 12px;
+      color: var(--green);
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: background 0.15s ease, transform 0.1s ease;
+      font-family: inherit;
+    }
+
+    .done-bottom-btn:hover {
+      background: #d9ecdf;
+    }
+
+    .done-bottom-btn:active {
+      transform: scale(0.98);
+    }
+
+    .done-bottom-btn.is-marked {
+      background: var(--green);
+      color: #fff;
+      border-color: var(--green);
+    }
+
+    .toc-num {
+      font-weight: 700;
+      color: var(--maroon);
+      flex-shrink: 0;
+      font-size: 0.85rem;
+    }
+
+    .toc-text {
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .qcard {
+      background: var(--paper);
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      margin-bottom: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+      scroll-margin-top: 14px;
+    }
+
+    .qcard[open] {
+      box-shadow: 0 6px 20px rgba(122, 31, 43, 0.1);
+    }
+
+    .qsummary {
+      cursor: pointer;
+      list-style: none;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #fbf4e6;
+    }
+
+    .qsummary::-webkit-details-marker {
+      display: none;
+    }
+
+    .qtext {
+      font-weight: 600;
+      flex: 1;
+      font-size: 1.02rem;
+      color: var(--ink);
+    }
+
+    .qtext b {
+      font-weight: 700;
+    }
+
+    .chev {
+      transition: transform 0.2s;
+      color: var(--ink-soft);
+      flex-shrink: 0;
+    }
+
+    .qcard[open] .chev {
+      transform: rotate(180deg);
+    }
+
+    .tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+
+    .tag-supreme {
+      background: #6b1220;
+      color: #fff;
+    }
+
+    .tag-important {
+      background: var(--gold);
+      color: #402c00;
+    }
+
+    .tag-top10 {
+      background: #2f6b4f;
+      color: #fff;
+    }
+
+    .tag-top20 {
+      background: #2b6a8f;
+      color: #fff;
+    }
+
+    .tag-top30 {
+      background: #7a4fa0;
+      color: #fff;
+    }
+
+    .tag-extra {
+      background: #999;
+      color: #fff;
+    }
+
+    .tag-star {
+      background: #b5661e;
+      color: #fff;
+    }
+
+    .tag-normal {
+      background: #ccc;
+      color: #333;
+    }
+
+    .qbody {
+      padding: 6px 4px;
+    }
+
+    .note-box {
+      background: #fff8e6;
+      border-left: 4px solid var(--gold);
+      border-radius: 8px;
+      padding: 8px 12px;
+      margin-bottom: 10px;
+      font-size: 0.88rem;
+      color: var(--ink-soft);
+      font-style: italic;
+    }
+
+    .intro-box,
+    .conclusion-box {
+      border-radius: 10px;
+      padding: 10px 12px;
+      margin-bottom: 10px;
+      font-size: 0.96rem;
+    }
+
+    .intro-box {
+      background: #eef3ee;
+      border-left: 4px solid var(--green);
+    }
+
+    .conclusion-box {
+      background: #f3ecf7;
+      border-left: 4px solid #7a4fa0;
+    }
+
+    .sec-label {
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+      color: var(--ink-soft);
+    }
+
+    .intro-box p,
+    .conclusion-box p {
+      margin: 0;
+    }
+
+    .sub-section {
+      margin-bottom: 10px;
+    }
+
+    .sub-title {
+      color: var(--maroon-dark);
+      font-size: 1.05rem;
+      margin: 0 0 6px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+    }
+
+    .points-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .point {
+      background: #fdfaf3;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 8px 12px;
+      margin-bottom: 6px;
+      font-size: 0.95rem;
+      color: var(--ink-soft);
+    }
+
+    .point b {
+      display: block;
+      color: var(--maroon-dark);
+      font-weight: 700;
+      margin-bottom: 3px;
+      font-size: 0.98rem;
+    }
+
+    .feat-label {
+      color: var(--maroon-dark);
+      font-weight: 600;
+      margin-top: 6px;
+      margin-bottom: 2px;
+      font-size: 0.93rem;
+    }
+
+    .feat-list {
+      margin: 0 0 6px;
+      padding-left: 20px;
+    }
+
+    .feat-list li {
+      margin-bottom: 3px;
+    }
+
+    .feat-example {
+      margin: 4px 0 0;
+    }
+
+    .cheat-wrap {
+      margin-top: 4px;
+      margin-bottom: 14px;
+    }
+
+    .cheat-wrap table {
+      border: 3px solid var(--maroon);
+    }
+
+    .compare-wrap {
+      padding-bottom: 14px;
+    }
+
+    .compare-wrap table.cheat-table {
+      border: 3px solid green;
+    }
+
+    .compare-wrap table.cheat-table thead th {
+      background: var(--green);
+    }
+
+    .table-scroll {
+      overflow-x: auto;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+
+    table.cheat-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      min-width: 420px;
+    }
+
+    table.cheat-table thead th {
+      background: var(--maroon);
+      color: #fff;
+      text-align: left;
+      padding: 7px 10px;
+    }
+
+    table.cheat-table td {
+      padding: 6px 10px;
+      border-bottom: 1px solid var(--border);
+      color: var(--ink-soft);
+    }
+
+    table.cheat-table tr:nth-child(even) td {
+      background: #fbf6ea;
+    }
+
+    footer {
+      text-align: center;
+      padding: 14px;
+      color: var(--ink-soft);
+      font-size: 0.85rem;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        line-height: 1.55;
+        font-size: 1rem;
+      }
+
+      header.top {
+        padding: 12px 16px;
+      }
+
+      header.top h1 {
+        font-size: 1.05rem;
+      }
+
+      .controls {
+        padding: 10px 12px;
+        gap: 8px;
+      }
+
+      .controls input[type="text"] {
+        flex: 1 1 100%;
+        max-width: none;
+        padding: 9px 12px;
+        font-size: 0.92rem;
+      }
+
+      .controls button {
+        flex: 1 1 auto;
+        padding: 8px 10px;
+        font-size: 0.8rem;
+      }
+
+      .chapter-filter {
+        padding: 8px 10px;
+        gap: 5px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .chapter-filter button {
+        padding: 6px 10px;
+        font-size: 0.72rem;
+        flex-shrink: 0;
+      }
+
+      .layout {
+        padding: 12px 10px;
+      }
+
+      details.toc-wrap {
+        margin-bottom: 14px;
+        padding: 4px;
+      }
+
+      details.toc-wrap>summary {
+        padding: 14px 0;
+        font-size: 1.08rem;
+      }
+
+      details.toc-wrap,
+      details.qcard {
+        border-radius: 12px;
+      }
+
+      .toc-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding-bottom: 14px;
+      }
+
+      .toc-item {
+        align-items: flex-start;
+        padding: 11px 8px;
+      }
+
+      .toc-text {
+        white-space: normal;
+        overflow: visible;
+        text-overflow: clip;
+        font-size: 1rem;
+      }
+
+      .qcard {
+        margin-bottom: 10px;
+      }
+
+      .qsummary {
+        padding: 12px 10px;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .qtext {
+        font-size: 1.14rem;
+        flex-basis: 100%;
+      }
+
+      .qbody {
+        padding: 10px 6px;
+      }
+
+      .note-box {
+        padding: 11px 10px;
+        margin-bottom: 10px;
+        font-size: 0.98rem;
+      }
+
+      .intro-box,
+      .conclusion-box {
+        padding: 10px 10px;
+        margin-bottom: 10px;
+        font-size: 1.06rem;
+      }
+
+      .sub-section {
+        margin-bottom: 10px;
+      }
+
+      .sub-title {
+        font-size: 1.18rem;
+        margin-bottom: 8px;
+      }
+
+      .point {
+        padding: 8px 10px;
+        margin-bottom: 6px;
+        font-size: 1.04rem;
+      }
+
+      .point b {
+        font-size: 1.06rem;
+      }
+
+      .tag {
+        font-size: 0.8rem;
+      }
+
+      table.cheat-table {
+        font-size: 0.98rem;
+      }
+
+      table.cheat-table td,
+      table.cheat-table thead th {
+        padding: 7px 10px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      header.top h1 {
+        font-size: 0.95rem;
+      }
+
+      .controls button {
+        font-size: 0.78rem;
+        padding: 8px 9px;
+      }
+    }
+
+    /* ===== Formula Sheet additions ===== */
+    .gnote-box {
+      background: var(--cream);
+      border: 1px solid var(--gold);
+      border-left: 5px solid var(--gold);
+      border-radius: 10px;
+      padding: 10px 14px;
+      margin: 0 0 14px 0;
+    }
+
+    .gnote-box .gnote-title {
+      font-weight: 700;
+      color: var(--maroon-dark);
+      margin-bottom: 6px;
+      font-size: 1.02rem;
+    }
+
+    .gnote-box ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .gnote-box li {
+      margin-bottom: 6px;
+      line-height: 1.6;
+    }
+
+    .chapter-heading {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--maroon);
+      border-bottom: 2px solid var(--gold);
+      padding-bottom: 5px;
+      margin: 18px 0 10px 0;
+    }
+
+    .chapter-heading:first-of-type {
+      margin-top: 0;
+    }
+
+    .fcard {
+      background: var(--paper);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+
+    .fcard .ftitle {
+      font-weight: 700;
+      color: var(--maroon-dark);
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+    }
+
+    .formula-box {
+      background: var(--cream);
+      border: 1px dashed var(--gold);
+      border-radius: 10px;
+      padding: 10px 10px;
+      text-align: center;
+      font-size: 1.25rem;
+      font-family: 'Cambria Math', Cambria, Georgia, serif;
+      color: var(--ink);
+      margin-bottom: 8px;
+      overflow-x: auto;
+      letter-spacing: 0.3px;
+    }
+
+    .formula-box .frac {
+      display: inline-flex;
+      flex-direction: column;
+      vertical-align: middle;
+      text-align: center;
+      margin: 0 5px;
+      line-height: 1.15;
+    }
+
+    .formula-box .frac .num {
+      border-bottom: 1.5px solid var(--ink);
+      padding: 0 6px 2px 6px;
+    }
+
+    .formula-box .frac .den {
+      padding: 2px 6px 0 6px;
+    }
+
+    .formula-box sup {
+      font-size: 0.68em;
+      position: relative;
+      top: -0.6em;
+    }
+
+    .formula-box sub {
+      font-size: 0.68em;
+      position: relative;
+      top: 0.35em;
+    }
+
+    .formula-box .sqrt {
+      display: inline-flex;
+      align-items: flex-start;
+      vertical-align: middle;
+      margin: 0 3px;
+    }
+
+    .formula-box .sqrt-sign {
+      font-size: 1.35em;
+      line-height: 1;
+      transform: scaleY(1.25);
+      padding-right: 2px;
+      margin-top: -2px;
+    }
+
+    .formula-box .sqrt-content {
+      border-top: 1.5px solid var(--ink);
+      padding: 3px 5px 0 5px;
+      display: inline-block;
+    }
+
+    .subgroup-heading {
+      font-size: 1.02rem;
+      font-weight: 700;
+      color: var(--maroon-dark);
+      background: var(--cream);
+      border-left: 4px solid var(--maroon);
+      padding: 6px 10px;
+      border-radius: 6px;
+      margin: 12px 0 8px 0;
+    }
+
+    .subgroup-heading:first-of-type {
+      margin-top: 10px;
+    }
+
+    .fcard .fusage {
+      font-size: 0.98rem;
+      line-height: 1.55;
+      color: var(--ink-soft);
+    }
+
+    .fcard .fusage b {
+      color: var(--ink);
+    }
+
+    .fcard .fnote {
+      margin-top: 6px;
+      padding: 7px 10px;
+      background: #f4f0e6;
+      border-radius: 8px;
+      font-size: 0.92rem;
+      color: var(--ink-soft);
+      border-left: 3px solid var(--gold);
+    }
+
+    @media (max-width: 480px) {
+      .formula-box {
+        font-size: 1.05rem;
+        padding: 10px 8px;
+      }
+
+      .chapter-heading {
+        font-size: 1.12rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="top">
+    <h1>📐 Finance — Formula Sheet</h1>
+  </header>
+
+  <div class="chapter-filter" id="chapterFilter">
+    <button class="active" data-chapter="all">All Chapters</button>
+    <button data-chapter="3">Chapter 3</button>
+    <button data-chapter="4">Chapter 4</button>
+    <button data-chapter="5">Chapter 5</button>
+    <button data-chapter="6">Chapter 6</button>
+    <button data-chapter="7">Chapter 7</button>
+  </div>
+
+  <div class="layout">
+
+    <div id="formulaList">
+      <div class="chapter-heading" data-chapter="3">Chapter 3: Time Value of Money</div>
+      <div class="gnote-box" data-chapter="3">
+        <div class="gnote-title">📌 Notes</div>
+        <ul>
+          <li>যদি বছরে একাধিকবার (m বার) compounding হয় — যেমন semi-annual (m=2), quarterly (m=4), bi-monthly (m=6),
+            monthly (m=12) —
+            তাহলে যেকোনো ফর্মুলায় <b>i</b> এর জায়গায় <b>i/m</b> এবং <b>n</b> এর জায়গায় <b>nm</b> বসাতে হবে।</li>
+          <li>যদি annuity <b>due</b> হয় — তাহলে সংশ্লিষ্ট Ordinary
+            Annuity ফর্মুলার সাথে অতিরিক্ত <b>(1 + i)</b> গুণ করতে হবে।</li>
+        </ul>
+      </div>
+
+      <div class="fcard" id="f-3-0" data-chapter="3">
+        <div class="ftitle">Simple Interest — Future Value</div>
+        <div class="formula-box">FV = P + P·N·i</div>
+        <div class="fusage"><b>কখন ব্যবহার হবে:</b> যখন সরল সুদে (Simple Interest, compounding ছাড়া) কোনো Principal
+          (P)-এর ভবিষ্যৎ মূল্য (Future Value) বের করতে হবে — N বছরের জন্য, বার্ষিক সুদের হার i তে।</div>
+
+      </div>
+
+      <div class="fcard" id="f-3-1" data-chapter="3">
+        <div class="ftitle">Compound Interest — Future Value (Lump Sum)</div>
+        <div class="formula-box">FV = PV ( 1 + i )<sup>n</sup></div>
+        <div class="fusage"><b>কখন ব্যবহার হবে:</b> যখন একটি একক Present Value (PV)-কে চক্রবৃদ্ধি সুদে (Compound
+          Interest) n বছর পর কত হবে তা বের করতে হবে।</div>
+        <div class="fnote">📝 m (compounding frequency) এবং due সংক্রান্ত নোট উপরে দেখুন।</div>
+      </div>
+
+      <div class="fcard" id="f-3-2" data-chapter="3">
+        <div class="ftitle">Future Value of an Annuity (Ordinary)</div>
+        <div class="formula-box">FVA = <span class="frac"><span class="num">A</span><span class="den">i</span></span> {
+          ( 1 + i )<sup>n</sup> − 1 }</div>
+        <div class="fusage"><b>কখন ব্যবহার হবে:</b> যখন প্রতি বছর/period সমান পরিমাণ টাকা (Annuity, A) জমা দেওয়া হয়
+          এবং ভবিষ্যতে তার মোট মূল্য (Future Value) বের করতে হবে।</div>
+        <div class="fnote">📝 Annuity due হলে শেষে (1 + i) গুণ করতে হবে।</div>
+      </div>
+
+      <div class="fcard" id="f-3-3" data-chapter="3">
+        <div class="ftitle">Present Value (Lump Sum)</div>
+        <div class="formula-box">PV = <span class="frac"><span class="num">FV</span><span class="den">( 1 + i
+              )<sup>n</sup></span></span></div>
+        <div class="fusage"><b>কখন ব্যবহার হবে:</b> যখন ভবিষ্যতের একটি নির্দিষ্ট পরিমাণ টাকার (Future Value) বর্তমান
+          মূল্য (Present Value) বের করতে হবে — অর্থাৎ discounting করতে হবে।</div>
+
+      </div>
+
+      <div class="fcard" id="f-3-4" data-chapter="3">
+        <div class="ftitle">Present Value of an Annuity (Ordinary)</div>
+        <div class="formula-box">PVA = <span class="frac"><span class="num">A</span><span class="den">i</span></span> {
+          1 − <span class="frac"><span class="num">1</span><span class="den">( 1 + i )<sup>n</sup></span></span> }</div>
+        <div class="fusage"><b>কখন ব্যবহার হবে:</b> যখন প্রতি বছর/period সমান পরিমাণ টাকা (Annuity, A) ভবিষ্যতে পাওয়া
+          যাবে, এবং তার বর্তমান মূল্য (Present Value) বের করতে হবে।</div>
+        <div class="fnote">📝 Annuity due হলে শেষে (1 + i) গুণ করতে হবে।</div>
+      </div>
+
+      <div class="chapter-heading" data-chapter="4">Chapter 4: Risk and Return</div>
+      <div class="fcard" id="chart-4-0" data-chapter="4">
+        <div class="subgroup-heading" data-chapter="4">With Probability (E(R), SD, CV)</div>
+        <div class="cheat-wrap">
+          <div class="table-scroll">
+            <table class="cheat-table">
+              <thead>
+                <tr>
+                  <th>Return (x) %</th>
+                  <th>P(x)</th>
+                  <th>x.P(x)</th>
+                  <th>(x−x̄)</th>
+                  <th>(x−x̄)²</th>
+                  <th>(x−x̄)².P(x)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td><b>Σx.P(x)=<br>x̄=</b></td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td><b>Σ(x−x̄)².P(x)=</b></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="fcard" id="f-4-0" data-chapter="4">
+          <div class="formula-box">E(R) = Σ [ x · P(x) ]</div>
+        </div>
+
+        <div class="fcard" id="f-4-1" data-chapter="4">
+          <div class="formula-box"><span class="sqrt"><span class="sqrt-sign">√</span><span class="sqrt-content">Σ ( x −
+                x̄ )<sup>2</sup> · P(x)</span></span></div>
+        </div>
+
+        <div class="fcard" id="f-4-2" data-chapter="4">
+          <div class="formula-box">CV = <span class="frac"><span class="num">σ</span><span
+                class="den">E(R)</span></span>
+            × 100</div>
+          <div class="fnote">📝 যে স্টকের CV কম, সেটাই Investment-এর জন্য বেশি safe (per unit return-এ কম risk)।</div>
+        </div>
+      </div>
+
+      <div class="fcard" id="chart-4-2" data-chapter="4">
+        <div class="subgroup-heading" data-chapter="4">Without Probability (E(R), SD, CV)</div>
+        <div class="cheat-wrap">
+          <div class="table-scroll">
+            <table class="cheat-table">
+              <thead>
+                <tr>
+                  <th>Year</th>
+                  <th>Return (x) %</th>
+                  <th>Deviation (x−x̄)</th>
+                  <th>(x−x̄)²</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td><b>Σx.P(x)/n=<br>x̄=</b></td>
+                  <td>&nbsp;</td>
+                  <td><b>Σ(x−x̄)²=</b></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="fcard" id="f-4-3" data-chapter="4">
+          <div class="formula-box">E(R) = <span class="frac"><span class="num">Σx.P(x)</span><span
+                class="den">N</span></span>
+          </div>
+        </div>
+
+        <div class="fcard" id="f-4-4" data-chapter="4">
+          <div class="formula-box"><span class="sqrt"><span class="sqrt-sign">√</span><span class="sqrt-content"><span
+                  class="frac"><span class="num">Σ(x−x̄)²</span><span class="den">N −
+                    1</span></span></span></span></div>
+        </div>
+
+        <div class="fcard" id="f-4-5" data-chapter="4">
+          <div class="formula-box">CV = <span class="frac"><span class="num">σ</span><span
+                class="den">E(R)</span></span>
+            ×
+            100</div>
+          <div class="fnote">📝 যে স্টকের CV কম, সেটাই Investment-এর জন্য বেশি safe (per unit return-এ কম risk)।</div>
+        </div>
+      </div>
+
+      <div class="fcard" id="chart-4-1" data-chapter="4">
+        <div class="subgroup-heading" data-chapter="4">With Probability (Cov)</div>
+        <div class="cheat-wrap">
+          <div class="table-scroll">
+            <table class="cheat-table">
+              <thead>
+                <tr>
+                  <th>Year</th>
+                  <th>P(x)</th>
+                  <th>(x−x̄)ₐ</th>
+                  <th>(x−x̄)ᵦ</th>
+                  <th>(x−x̄)ₐ.(x−x̄)ᵦ</th>
+                  <th>(x−x̄)ₐ.(x−x̄)ᵦ.P(x)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td><b>Σ(x−x̄)ₐ.(x−x̄)ᵦ.P(x) =</b></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="fcard" id="f-4-6" data-chapter="4">
+          <div class="formula-box">Cov(x,y) = Σ [ ( x − x̄ )( y − ȳ ) · P(x) ]</div>
+        </div>
+      </div>
+
+      <div class="fcard" id="chart-4-3" data-chapter="4">
+        <div class="subgroup-heading" data-chapter="4">Without Probability (Cov)</div>
+        <div class="cheat-wrap">
+          <div class="table-scroll">
+            <table class="cheat-table">
+              <thead>
+                <tr>
+                  <th>Year</th>
+                  <th>(x−x̄)ₐ</th>
+                  <th>(x−x̄)ᵦ</th>
+                  <th>(x−x̄)ₐ × (x−x̄)ᵦ</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td><b>Σ(x−x̄)ₐ(x−x̄)ᵦ =</b></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="fcard" id="f-4-7" data-chapter="4">
+          <div class="formula-box">Cov(x,y) = <span class="frac"><span class="num">Σ ( x − x̄ )( y − ȳ )</span><span
+                class="den">N</span></span></div>
+        </div>
+      </div>
+
+      <div class="fcard" id="f-4-8" data-chapter="4">
+        <div class="subgroup-heading" data-chapter="4">Correlation Coefficient (Cor)</div>
+        <div class="formula-box">Cor(x,y) = <span class="frac"><span class="num">Cov(x,y)</span><span
+              class="den">σ<sub>x</sub> · σ<sub>y</sub></span></span></div>
+      </div>
+
+      <div class="fcard" id="f-4-9" data-chapter="4">
+        <div class="subgroup-heading" data-chapter="4">Portfolio Expected Return E(R<sub>p</sub>)</div>
+        <div class="formula-box">E(R<sub>p</sub>) = R<sub>1</sub>·W<sub>1</sub> + R<sub>2</sub>·W<sub>2</sub></div>
+        <div class="fnote">📝 W₁ + W₂ = 1 (সবগুলো Weight-এর যোগফল সবসময় ১০০% বা ১ হবে)।</div>
+      </div>
+
+      <div class="fcard" id="f-4-10" data-chapter="4">
+        <div class="subgroup-heading" data-chapter="4">Portfolio Standard Deviation without Correlation</div>
+        <div class="formula-box"><span class="sqrt"><span class="sqrt-sign">√</span><span
+              class="sqrt-content">σ<sub>1</sub><sup>2</sup>W<sub>1</sub><sup>2</sup> +
+              σ<sub>2</sub><sup>2</sup>W<sub>2</sub><sup>2</sup></span></span></div>
+      </div>
+
+      <div class="fcard" id="f-4-11" data-chapter="4">
+        <div class="subgroup-heading" data-chapter="4">Portfolio Standard Deviation with Correlation</div>
+        <div class="formula-box"><span class="sqrt"><span class="sqrt-sign">√</span><span
+              class="sqrt-content">σ<sub>1</sub><sup>2</sup>W<sub>1</sub><sup>2</sup> +
+              σ<sub>2</sub><sup>2</sup>W<sub>2</sub><sup>2</sup> +
+              2·σ<sub>1</sub>·σ<sub>2</sub>·W<sub>1</sub>·W<sub>2</sub>·Corr<sub>1,2</sub></span></span></div>
+        <div class="fnote">📝 Correlation-এর বদলে সরাসরি Covariance দেওয়া থাকলে, 2·σ1·σ2·W1·W2·Corr1,2 এর জায়গায়
+          2·W1·W2·Cov1,2 বসানো যায়।</div>
+      </div>
+
+      <div class="fcard" id="f-4-12" data-chapter="4">
+        <div class="subgroup-heading" data-chapter="4">Portfolio Beta</div>
+        <div class="formula-box">β<sub>p</sub> = β<sub>1</sub>W<sub>1</sub> + β<sub>2</sub>W<sub>2</sub> +
+          β<sub>3</sub>W<sub>3</sub></div>
+        <div class="fusage"><b>কখন ব্যবহার হবে:</b> একাধিক সিকিউরিটি/Asset নিয়ে গঠিত Portfolio-র Systematic Risk
+          (Market Risk) measure করতে — প্রতিটা Asset-এর Beta-কে তার Weight দিয়ে গুণ করে যোগ করতে হয়।</div>
+
+      </div>
+
+      <div class="chapter-heading" data-chapter="5">Chapter 5: Cost of Capital</div>
+
+      <div class="fcard" id="f-5-0" data-chapter="5">
+        <div class="ftitle">Cost of Common Share (K<sub>e</sub>)</div>
+        <div class="formula-box">k<sub>e</sub> = <span class="frac"><span class="num">D<sub>1</sub></span><span
+              class="den">P<sub>0</sub> − F</span></span> × 100</div>
+      </div>
+
+      <div class="fcard" id="f-5-1" data-chapter="5">
+        <div class="ftitle">Cost of Retained Earning (K<sub>r</sub>) — Dividend Growth Method</div>
+        <div class="formula-box">k<sub>r</sub> = <span class="frac"><span class="num">D<sub>1</sub></span><span
+              class="den">P<sub>0</sub></span></span> + g × 100</div>
+      </div>
+
+      <div class="fcard" id="f-5-2" data-chapter="5">
+        <div class="ftitle">Cost of Retained Earning (K<sub>r</sub>) — Tax Adjusted Method</div>
+        <div class="formula-box">k<sub>r</sub> = k<sub>e</sub> ( 1 − T<sub>p</sub> )</div>
+      </div>
+
+      <div class="fcard" id="f-5-3" data-chapter="5">
+        <div class="ftitle">Cost of Preference Share (K<sub>p</sub>) — Non-redeemable</div>
+        <div class="formula-box">k<sub>p</sub> = <span class="frac"><span class="num">D<sub>p</sub></span><span
+              class="den">P<sub>0</sub> − F</span></span> × 100</div>
+      </div>
+
+      <div class="fcard" id="f-5-4" data-chapter="5">
+        <div class="ftitle">Cost of Preference Share (K<sub>p</sub>) — Redeemable</div>
+        <div class="formula-box">k<sub>p</sub> = <span class="frac"><span class="num">D<sub>p</sub> + <span
+                class="frac"><span class="num">FV+NSV</span><span class="den">N</span></span></span><span
+              class="den"><span class="frac"><span class="num">FV+NSV</span><span
+                  class="den">2</span></span></span></span> × 100</div>
+      </div>
+
+      <div class="fcard" id="f-5-5" data-chapter="5">
+        <div class="ftitle">Cost of Debenture (K<sub>d</sub>) — Non-redeemable</div>
+        <div class="formula-box">k<sub>d</sub> = K<sub>i</sub> ( 1 − T )</div>
+      </div>
+
+      <div class="fcard" id="f-5-6" data-chapter="5">
+        <div class="ftitle">Cost of Debenture (K<sub>d</sub>) — Redeemable</div>
+        <div class="formula-box">k<sub>d</sub> = <span class="frac"><span class="num">I ( 1 − T ) + <span
+                class="frac"><span class="num">FV−NSV</span><span class="den">N</span></span></span><span
+              class="den"><span class="frac"><span class="num">FV+NSV</span><span
+                  class="den">2</span></span></span></span> × 100</div>
+      </div>
+
+      <div class="fcard" id="chart-5-0" data-chapter="5">
+        <div class="ftitle">Weighted Average Cost of Capital (WACC)</div>
+        <div class="cheat-wrap">
+          <div class="table-scroll">
+            <table class="cheat-table">
+              <thead>
+                <tr>
+                  <th>Source</th>
+                  <th>Capital Amount</th>
+                  <th>Cost</th>
+                  <th>Total Cost</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td><b>Total</b></td>
+                  <td><b>Total Capital=</b></td>
+                  <td>&nbsp;</td>
+                  <td><b>Total Cost=</b></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="fcard" id="f-5-7" data-chapter="5">
+          <div class="formula-box">WACC = <span class="frac"><span class="num">Total Cost</span><span
+                class="den">Total Capital</span></span> × 100</div>
+        </div>
+      </div>
+
+      <div class="chapter-heading" data-chapter="6">Chapter 6: Pricing Model</div>
+
+      <div class="fcard" id="f-6-0" data-chapter="6">
+        <div class="ftitle">Capital Asset Pricing Model (CAPM) / Security Market Line (SML)</div>
+        <div class="formula-box">E(R) = R<sub>f</sub> + ( R<sub>m</sub> − R<sub>f</sub> ) β</div>
+      </div>
+
+      <div class="fcard" id="f-6-1" data-chapter="6">
+        <div class="ftitle">Expected Return — Risk Premium per Unit of Risk (σ)</div>
+        <div class="formula-box">E(R) = R<sub>f</sub> + <span class="frac"><span class="num">R<sub>m</sub> −
+                R<sub>f</sub></span><span class="den">σ</span></span> × σ</div>
+      </div>
+
+      <div class="fcard" id="f-6-2" data-chapter="6">
+        <div class="ftitle">Capital Market Line (CML)</div>
+        <div class="formula-box">CML = <span class="frac"><span class="num">R<sub>m</sub> −
+                R<sub>f</sub></span><span class="den">σ<sub>m</sub></span></span></div>
+      </div>
+
+      <div class="chapter-heading" data-chapter="7">Chapter 7: Short, Mid &amp; Long Term Financing</div>
+
+      <div class="subgroup-heading" data-chapter="7">Short Term Finance</div>
+
+      <div class="fcard" id="f-7-0" data-chapter="7">
+        <div class="ftitle">Cost of Trade Credit / Cash Discount (K<sub>te</sub>)</div>
+        <div class="formula-box">k<sub>te</sub> = <span class="frac"><span class="num">CD</span><span
+              class="den">100 − CD</span></span> × <span class="frac"><span class="num">360</span><span
+              class="den">CP − DP</span></span> × 100</div>
+        <div class="formula-box">EIR = { ( 1 + r )<sup>n</sup> − 1 } × 100</div>
+      </div>
+
+      <div class="fcard" id="f-7-1" data-chapter="7">
+        <div class="ftitle">Cost of Commercial Paper (K<sub>cp</sub>)</div>
+        <div class="formula-box">k<sub>cp</sub> = <span class="frac"><span class="num">FV − NSV</span><span
+              class="den">NSV</span></span> × <span class="frac"><span class="num">360</span><span
+              class="den">MP</span></span> × 100</div>
+        <div class="formula-box">EIR = { ( 1 + r )<sup>n</sup> − 1 } × 100</div>
+      </div>
+
+      <div class="fcard" id="f-7-2" data-chapter="7">
+        <div class="ftitle">Effective Interest Rate — Bank Loan</div>
+        <div class="formula-box">EIR = <span class="frac"><span class="num">Interest</span><span
+              class="den">Usable Loan</span></span> × 100</div>
+      </div>
+
+      <div class="fcard" id="f-7-3" data-chapter="7">
+        <div class="ftitle">Effective Interest Rate — Line of Credit (Compensating Balance)</div>
+        <div class="formula-box">EIR = <span class="frac"><span class="num">I + CB</span><span
+              class="den">Used Loan</span></span></div>
+      </div>
+
+      <div class="fcard" id="f-7-4" data-chapter="7">
+        <div class="ftitle">Effective Interest Rate — Factoring</div>
+        <div class="formula-box">EIR = <span class="frac"><span class="num">Net Annual Factoring Cost</span><span
+              class="den">Net Amount of Advance</span></span></div>
+      </div>
+
+      <div class="subgroup-heading" data-chapter="7">Mid Term Finance</div>
+
+      <div class="fcard" id="chart-7-0" data-chapter="7">
+        <div class="ftitle">Balloon Payment Method</div>
+        <div class="formula-box">Annual Repayment of Principal = <span class="frac"><span class="num">Loan</span><span
+              class="den">No. of Years</span></span></div>
+        <div class="cheat-wrap">
+          <div class="table-scroll">
+            <table class="cheat-table">
+              <thead>
+                <tr>
+                  <th>Year</th>
+                  <th>Principal</th>
+                  <th>Interest (%)</th>
+                  <th>Installment</th>
+                  <th>Balance of Loan</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="fcard" id="chart-7-1" data-chapter="7">
+        <div class="ftitle">Capital Recovery Method</div>
+        <div class="formula-box">PVA = <span class="frac"><span class="num">A</span><span class="den">i</span></span>
+          { 1 − <span class="frac"><span class="num">1</span><span class="den">( 1 + i )<sup>n</sup></span></span> }
+        </div>
+        <div class="cheat-wrap">
+          <div class="table-scroll">
+            <table class="cheat-table">
+              <thead>
+                <tr>
+                  <th>Year</th>
+                  <th>Installment</th>
+                  <th>Interest (%)</th>
+                  <th>Principal</th>
+                  <th>Balance of Loan</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="subgroup-heading" data-chapter="7">Long Term Finance</div>
+
+      <div class="fcard" id="f-7-5" data-chapter="7">
+        <div class="ftitle">Bond Value — Redeemable (Coupon) Bond</div>
+        <div class="formula-box">B<sub>o</sub> = <span class="frac"><span class="num">A</span><span
+              class="den">i</span></span> { 1 − <span class="frac"><span class="num">1</span><span
+                class="den">( 1 + i )<sup>n</sup></span></span> } + <span class="frac"><span class="num">MV</span><span
+              class="den">( 1 + i )<sup>n</sup></span></span></div>
+      </div>
+
+      <div class="fcard" id="f-7-6" data-chapter="7">
+        <div class="ftitle">Bond Value — Perpetual / Irredeemable Bond</div>
+        <div class="formula-box">B<sub>o</sub> = <span class="frac"><span class="num">A</span><span
+              class="den">i</span></span> = <span class="frac"><span class="num">I</span><span
+              class="den">k<sub>d</sub></span></span></div>
+      </div>
+
+      <div class="fcard" id="f-7-7" data-chapter="7">
+        <div class="ftitle">Bond Value — Zero Coupon Bond</div>
+        <div class="formula-box">B<sub>o</sub> = <span class="frac"><span class="num">FV</span><span
+              class="den">( 1 + i )<sup>n</sup></span></span></div>
+      </div>
+
+      <div class="fcard" id="f-7-8" data-chapter="7">
+        <div class="ftitle">Yield to Call (YTC)</div>
+        <div class="formula-box">YTC = <span class="frac"><span class="num">I + <span class="frac"><span
+                  class="num">FV−NSV</span><span class="den">N</span></span></span><span class="den"><span
+                class="frac"><span class="num">FV+NSV</span><span class="den">2</span></span></span></span> ×
+          100</div>
+      </div>
+
+      <div class="fcard" id="f-7-9" data-chapter="7">
+        <div class="ftitle">Next Year's Dividend</div>
+        <div class="formula-box">D<sub>1</sub> = D<sub>0</sub> ( 1 + g )</div>
+      </div>
+
+      <div class="fcard" id="f-7-10" data-chapter="7">
+        <div class="ftitle">Common Share Value — Multi-Stage (Variable Growth) Dividend Discount Model</div>
+        <div class="formula-box">P<sub>0</sub> = <span class="frac"><span class="num">D<sub>1</sub></span><span
+              class="den">( 1 + k<sub>e</sub> )<sup>1</sup></span></span> + <span class="frac"><span
+              class="num">D<sub>2</sub></span><span class="den">( 1 + k<sub>e</sub> )<sup>2</sup></span></span> + ...
+          + <span class="frac"><span class="num">D<sub>n</sub> + P<sub>n</sub></span><span
+              class="den">( 1 + k<sub>e</sub> )<sup>n</sup></span></span></div>
+      </div>
+
+      <div class="fcard" id="f-7-11" data-chapter="7">
+        <div class="ftitle">Terminal Value (P<sub>n</sub>)</div>
+        <div class="formula-box">P<sub>n</sub> = <span class="frac"><span class="num">D<sub>n−1</sub></span><span
+              class="den">k<sub>e</sub> − g</span></span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    let activeChapter = 'all';
+
+    function applyFilters() {
+      document.querySelectorAll('.fcard').forEach(card => {
+        const chapterMatch = activeChapter === 'all' || card.getAttribute('data-chapter') === activeChapter;
+        card.style.display = chapterMatch ? '' : 'none';
+      });
+      document.querySelectorAll('.chapter-heading, .subgroup-heading, .gnote-box').forEach(h => {
+        const chapterMatch = activeChapter === 'all' || h.getAttribute('data-chapter') === activeChapter;
+        h.style.display = chapterMatch ? '' : 'none';
+      });
+    }
+
+    document.getElementById('chapterFilter').addEventListener('click', function (e) {
+      const btn = e.target.closest('button[data-chapter]');
+      if (!btn) return;
+      activeChapter = btn.getAttribute('data-chapter');
+      document.querySelectorAll('#chapterFilter button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      applyFilters();
+    });
+  </script>
+
+  <script>
+    document.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+    document.addEventListener('selectstart', function (e) { e.preventDefault(); });
+    document.addEventListener('copy', function (e) { e.preventDefault(); });
+    document.addEventListener('keydown', function (e) {
+      const key = e.key.toLowerCase();
+      if ((e.ctrlKey || e.metaKey) && (key === 'c' || key === 'a' || key === 'x' || key === 'u')) {
+        e.preventDefault();
+      }
+    });
+  </script>
+
+</body>
+
+</html>
