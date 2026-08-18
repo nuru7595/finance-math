@@ -145,6 +145,22 @@
       color: #fff;
     }
 
+    .chapter-filter button.is-complete {
+      border-color: var(--green);
+    }
+
+    .chapter-filter button.is-complete::after {
+      content: '✓';
+      display: inline-block;
+      margin-left: 5px;
+      color: var(--green);
+      font-weight: 900;
+    }
+
+    .chapter-filter button.is-complete.active::after {
+      color: #cdf0da;
+    }
+
     .layout {
       max-width: 1100px;
       margin: 0 auto;
@@ -198,8 +214,16 @@
     }
 
     #resetDone {
-      border-color: var(--ink-soft);
+      border: 1.5px solid var(--ink-soft);
       color: var(--ink-soft);
+      background: transparent;
+      padding: 3px 10px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.15s ease, color 0.15s ease;
     }
 
     #resetDone:hover {
@@ -778,6 +802,48 @@
       border-bottom: 2px solid var(--gold);
       padding-bottom: 5px;
       margin: 18px 0 10px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .chapter-heading.is-done .chapter-heading-text {
+      text-decoration: line-through;
+      color: var(--ink-soft);
+    }
+
+    .chapter-done-btn {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 12px;
+      background: var(--cream);
+      border: 1.5px solid var(--border);
+      border-radius: 20px;
+      color: var(--ink-soft);
+      font-weight: 700;
+      font-size: 0.75rem;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.15s ease, transform 0.1s ease, color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .chapter-done-btn:hover {
+      background: #e9f3ec;
+      border-color: #bfe0cc;
+    }
+
+    .chapter-done-btn:active {
+      transform: scale(0.96);
+    }
+
+    .chapter-done-btn.is-marked {
+      background: var(--green);
+      color: #fff;
+      border-color: var(--green);
     }
 
     .chapter-heading:first-of-type {
@@ -930,10 +996,23 @@
     <button data-chapter="9">Chapter 9</button>
   </div>
 
+  <div class="progress-wrap">
+    <div class="progress-info">
+      <span id="progressText">0 / 7 Chapters Complete</span>
+      <button id="resetDone" type="button">Reset</button>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </div>
+
   <div class="layout">
 
     <div id="formulaList">
-      <div class="chapter-heading" data-chapter="3">Chapter 3: Time Value of Money</div>
+      <div class="chapter-heading" data-chapter="3">
+        <span class="chapter-heading-text">Chapter 3: Time Value of Money</span>
+        <button class="chapter-done-btn" data-chapter="3" type="button">✓ Mark Complete</button>
+      </div>
       <div class="gnote-box" data-chapter="3">
         <div class="gnote-title">📌 Notes</div>
         <ul>
@@ -988,7 +1067,10 @@
         <div class="fnote">📝 Annuity due হলে শেষে (1 + i) গুণ করতে হবে।</div>
       </div>
 
-      <div class="chapter-heading" data-chapter="4">Chapter 4: Risk and Return</div>
+      <div class="chapter-heading" data-chapter="4">
+        <span class="chapter-heading-text">Chapter 4: Risk and Return</span>
+        <button class="chapter-done-btn" data-chapter="4" type="button">✓ Mark Complete</button>
+      </div>
       <div class="fcard" id="chart-4-0" data-chapter="4">
         <div class="subgroup-heading" data-chapter="4">With Probability (E(R), SD, CV)</div>
         <div class="cheat-wrap">
@@ -1041,8 +1123,7 @@
 
         <div class="fcard" id="f-4-1" data-chapter="4">
           <div class="ftitle">Standard Deviation (σ) — With Probability</div>
-          <div class="formula-box">σ = <span class="sqrt"><span class="sqrt-sign">√</span><span class="sqrt-content">Σ (
-                x −
+          <div class="formula-box">σ = <span class="sqrt"><span class="sqrt-sign">√</span><span class="sqrt-content">Σ ( x −
                 x̄ )<sup>2</sup> · P(x)</span></span></div>
         </div>
 
@@ -1101,8 +1182,8 @@
 
         <div class="fcard" id="f-4-4" data-chapter="4">
           <div class="ftitle">Standard Deviation (σ) — Without Probability</div>
-          <div class="formula-box">σ = <span class="sqrt"><span class="sqrt-sign">√</span><span
-                class="sqrt-content"><span class="frac"><span class="num">Σ(x−x̄)²</span><span class="den">N −
+          <div class="formula-box">σ = <span class="sqrt"><span class="sqrt-sign">√</span><span class="sqrt-content"><span
+                  class="frac"><span class="num">Σ(x−x̄)²</span><span class="den">N −
                     1</span></span></span></span></div>
         </div>
 
@@ -1245,12 +1326,15 @@
 
       </div>
 
-      <div class="chapter-heading" data-chapter="5">Chapter 5: Cost of Capital</div>
+      <div class="chapter-heading" data-chapter="5">
+        <span class="chapter-heading-text">Chapter 5: Cost of Capital</span>
+        <button class="chapter-done-btn" data-chapter="5" type="button">✓ Mark Complete</button>
+      </div>
 
       <div class="fcard" id="f-5-0" data-chapter="5">
         <div class="ftitle">Cost of Common Share (K<sub>e</sub>)</div>
         <div class="formula-box">k<sub>e</sub> = <span class="frac"><span class="num">D<sub>1</sub></span><span
-              class="den">P<sub>0</sub> − F</span></span> + g × 100</div>
+              class="den">P<sub>0</sub> − F</span></span> × 100</div>
       </div>
 
       <div class="fcard" id="f-5-1" data-chapter="5">
@@ -1273,7 +1357,7 @@
       <div class="fcard" id="f-5-4" data-chapter="5">
         <div class="ftitle">Cost of Preference Share (K<sub>p</sub>) — Redeemable</div>
         <div class="formula-box">k<sub>p</sub> = <span class="frac"><span class="num">D<sub>p</sub> + <span
-                class="frac"><span class="num">RV-NSV</span><span class="den">N</span></span></span><span
+                class="frac"><span class="num">FV+NSV</span><span class="den">N</span></span></span><span
               class="den"><span class="frac"><span class="num">FV+NSV</span><span
                   class="den">2</span></span></span></span> × 100</div>
       </div>
@@ -1286,7 +1370,7 @@
       <div class="fcard" id="f-5-6" data-chapter="5">
         <div class="ftitle">Cost of Debenture (K<sub>d</sub>) — Redeemable</div>
         <div class="formula-box">k<sub>d</sub> = <span class="frac"><span class="num">I ( 1 − T ) + <span
-                class="frac"><span class="num">RV−NSV</span><span class="den">N</span></span></span><span
+                class="frac"><span class="num">FV−NSV</span><span class="den">N</span></span></span><span
               class="den"><span class="frac"><span class="num">FV+NSV</span><span
                   class="den">2</span></span></span></span> × 100</div>
       </div>
@@ -1329,12 +1413,15 @@
         </div>
 
         <div class="fcard" id="f-5-7" data-chapter="5">
-          <div class="formula-box">WACC = <span class="frac"><span class="num">Total Cost</span><span class="den">Total
-                Capital</span></span> × 100</div>
+          <div class="formula-box">WACC = <span class="frac"><span class="num">Total Cost</span><span
+                class="den">Total Capital</span></span> × 100</div>
         </div>
       </div>
 
-      <div class="chapter-heading" data-chapter="6">Chapter 6: Pricing Model</div>
+      <div class="chapter-heading" data-chapter="6">
+        <span class="chapter-heading-text">Chapter 6: Pricing Model</span>
+        <button class="chapter-done-btn" data-chapter="6" type="button">✓ Mark Complete</button>
+      </div>
 
       <div class="fcard" id="f-6-0" data-chapter="6">
         <div class="ftitle">Capital Asset Pricing Model (CAPM) / Security Market Line (SML)</div>
@@ -1344,24 +1431,27 @@
       <div class="fcard" id="f-6-1" data-chapter="6">
         <div class="ftitle">Expected Return — Risk Premium per Unit of Risk (σ)</div>
         <div class="formula-box">E(R) = R<sub>f</sub> + <span class="frac"><span class="num">R<sub>m</sub> −
-              R<sub>f</sub></span><span class="den">σ</span></span> × σ</div>
+                R<sub>f</sub></span><span class="den">σ</span></span> × σ</div>
       </div>
 
       <div class="fcard" id="f-6-2" data-chapter="6">
         <div class="ftitle">Capital Market Line (CML)</div>
         <div class="formula-box">CML = <span class="frac"><span class="num">R<sub>m</sub> −
-              R<sub>f</sub></span><span class="den">σ<sub>m</sub></span></span></div>
+                R<sub>f</sub></span><span class="den">σ<sub>m</sub></span></span></div>
       </div>
 
-      <div class="chapter-heading" data-chapter="7">Chapter 7: Short, Mid &amp; Long Term Financing</div>
+      <div class="chapter-heading" data-chapter="7">
+        <span class="chapter-heading-text">Chapter 7: Short, Mid &amp; Long Term Financing</span>
+        <button class="chapter-done-btn" data-chapter="7" type="button">✓ Mark Complete</button>
+      </div>
 
       <div class="subgroup-heading" data-chapter="7">Short Term Finance</div>
 
       <div class="fcard" id="f-7-0" data-chapter="7">
         <div class="ftitle">Cost of Trade Credit / Cash Discount (K<sub>te</sub>)</div>
-        <div class="formula-box">k<sub>te</sub> = <span class="frac"><span class="num">CD</span><span class="den">100 −
-              CD</span></span> × <span class="frac"><span class="num">360</span><span class="den">CP − DP</span></span>
-          × 100</div>
+        <div class="formula-box">k<sub>te</sub> = <span class="frac"><span class="num">CD</span><span
+              class="den">100 − CD</span></span> × <span class="frac"><span class="num">360</span><span
+              class="den">CP − DP</span></span> × 100</div>
         <div class="formula-box">EIR = { ( 1 + r )<sup>n</sup> − 1 } × 100</div>
       </div>
 
@@ -1375,14 +1465,14 @@
 
       <div class="fcard" id="f-7-2" data-chapter="7">
         <div class="ftitle">Effective Interest Rate — Bank Loan</div>
-        <div class="formula-box">EIR = <span class="frac"><span class="num">Interest</span><span class="den">Usable
-              Loan</span></span> × 100</div>
+        <div class="formula-box">EIR = <span class="frac"><span class="num">Interest</span><span
+              class="den">Usable Loan</span></span> × 100</div>
       </div>
 
       <div class="fcard" id="f-7-3" data-chapter="7">
         <div class="ftitle">Effective Interest Rate — Line of Credit (Compensating Balance)</div>
-        <div class="formula-box">EIR = <span class="frac"><span class="num">I + CB</span><span class="den">Used
-              Loan</span></span></div>
+        <div class="formula-box">EIR = <span class="frac"><span class="num">I + CB</span><span
+              class="den">Used Loan</span></span></div>
       </div>
 
       <div class="fcard" id="f-7-4" data-chapter="7">
@@ -1487,9 +1577,9 @@
       <div class="fcard" id="f-7-5" data-chapter="7">
         <div class="ftitle">Bond Value — Redeemable (Coupon) Bond</div>
         <div class="formula-box">B<sub>o</sub> = <span class="frac"><span class="num">A</span><span
-              class="den">i</span></span> { 1 − <span class="frac"><span class="num">1</span><span class="den">( 1 + i
-              )<sup>n</sup></span></span> } + <span class="frac"><span class="num">MV</span><span class="den">( 1 + i
-              )<sup>n</sup></span></span></div>
+              class="den">i</span></span> { 1 − <span class="frac"><span class="num">1</span><span
+                class="den">( 1 + i )<sup>n</sup></span></span> } + <span class="frac"><span class="num">MV</span><span
+              class="den">( 1 + i )<sup>n</sup></span></span></div>
       </div>
 
       <div class="fcard" id="f-7-6" data-chapter="7">
@@ -1501,8 +1591,8 @@
 
       <div class="fcard" id="f-7-7" data-chapter="7">
         <div class="ftitle">Bond Value — Zero Coupon Bond</div>
-        <div class="formula-box">B<sub>o</sub> = <span class="frac"><span class="num">FV</span><span class="den">( 1 + i
-              )<sup>n</sup></span></span></div>
+        <div class="formula-box">B<sub>o</sub> = <span class="frac"><span class="num">FV</span><span
+              class="den">( 1 + i )<sup>n</sup></span></span></div>
       </div>
 
       <div class="fcard" id="f-7-8" data-chapter="7">
@@ -1523,8 +1613,8 @@
         <div class="formula-box">P<sub>0</sub> = <span class="frac"><span class="num">D<sub>1</sub></span><span
               class="den">( 1 + k<sub>e</sub> )<sup>1</sup></span></span> + <span class="frac"><span
               class="num">D<sub>2</sub></span><span class="den">( 1 + k<sub>e</sub> )<sup>2</sup></span></span> + ...
-          + <span class="frac"><span class="num">D<sub>n</sub> + P<sub>n</sub></span><span class="den">( 1 +
-              k<sub>e</sub> )<sup>n</sup></span></span></div>
+          + <span class="frac"><span class="num">D<sub>n</sub> + P<sub>n</sub></span><span
+              class="den">( 1 + k<sub>e</sub> )<sup>n</sup></span></span></div>
       </div>
 
       <div class="fcard" id="f-7-11" data-chapter="7">
@@ -1533,7 +1623,10 @@
               class="den">k<sub>e</sub> − g</span></span></div>
       </div>
 
-      <div class="chapter-heading" data-chapter="8">Chapter 8: Investment Decisions (Capital Budgeting)</div>
+      <div class="chapter-heading" data-chapter="8">
+        <span class="chapter-heading-text">Chapter 8: Investment Decisions (Capital Budgeting)</span>
+        <button class="chapter-done-btn" data-chapter="8" type="button">✓ Mark Complete</button>
+      </div>
 
       <div class="gnote-box" data-chapter="8">
         <div class="gnote-title">📌 Overview</div>
@@ -1640,10 +1733,10 @@
 
       <div class="fcard" id="f-8-3" data-chapter="8">
         <div class="ftitle">Accounting / Average Rate of Return (ARR)</div>
-        <div class="formula-box">ARR = <span class="frac"><span class="num">Average EAT</span><span class="den">Average
-              Investment</span></span> × 100</div>
-        <div class="formula-box">Average Investment = WC + SV + <span class="frac"><span class="num">Investment −
-              SV</span><span class="den">2</span></span></div>
+        <div class="formula-box">ARR = <span class="frac"><span class="num">Average EAT</span><span
+              class="den">Average Investment</span></span> × 100</div>
+        <div class="formula-box">Average Investment = WC + SV + <span class="frac"><span
+              class="num">Investment − SV</span><span class="den">2</span></span></div>
       </div>
 
       <div class="fcard" id="f-8-4" data-chapter="8">
@@ -1661,11 +1754,10 @@
 
       <div class="fcard" id="f-8-6" data-chapter="8">
         <div class="ftitle">Internal Rate of Return (IRR)</div>
-        <div class="formula-box">IRR = L + <span class="frac"><span class="num">P</span><span class="den">P −
-              N</span></span> ( H − L )</div>
+        <div class="formula-box">IRR = L + <span class="frac"><span class="num">P</span><span
+              class="den">P − N</span></span> ( H − L )</div>
         <div class="fnote">📝 <b>L</b> = Low Rate (%) &nbsp;|&nbsp; <b>H</b> = High Rate (%) &nbsp;|&nbsp;
-          <b>P</b> = Low Rate-এর NPV (৳) &nbsp;|&nbsp; <b>N</b> = High Rate-এর NPV (৳)।
-        </div>
+          <b>P</b> = Low Rate-এর NPV (৳) &nbsp;|&nbsp; <b>N</b> = High Rate-এর NPV (৳)।</div>
         <div class="fusage"><b>কিভাবে বের করবে:</b> Extra একটা 4-column টেবিল বানাতে হবে (Year, CFAT, PV Factor,
           Total PV) — দুইটা ভিন্ন Rate ধরে। একটা Rate-এ PV Factor বেশি ধরে NPV <b>(+)</b> বের করতে হবে, আরেকটা
           Rate-এ PV Factor কম ধরে NPV <b>(−)</b> বের করতে হবে (সাধারণত 1–2% বা 10–15% ব্যবধানে ট্রায়াল দেওয়া হয়)।
@@ -1673,7 +1765,10 @@
           করতে হবে।</div>
       </div>
 
-      <div class="chapter-heading" data-chapter="9">Chapter 9: Capital Structure Decision</div>
+      <div class="chapter-heading" data-chapter="9">
+        <span class="chapter-heading-text">Chapter 9: Capital Structure Decision</span>
+        <button class="chapter-done-btn" data-chapter="9" type="button">✓ Mark Complete</button>
+      </div>
 
       <div class="subgroup-heading" data-chapter="9">Step 1: Income Statement (EBIT − EBT বের করার জন্য)</div>
 
@@ -1769,6 +1864,72 @@
       btn.classList.add('active');
       applyFilters();
     });
+  </script>
+
+  <script>
+    const DONE_STORAGE_KEY = 'financeSheetDoneChapters';
+    const allChapterNumbers = Array.from(document.querySelectorAll('.chapter-heading'))
+      .map(h => h.getAttribute('data-chapter'));
+    const totalChapters = allChapterNumbers.length;
+
+    function getDoneChapters() {
+      try {
+        const raw = localStorage.getItem(DONE_STORAGE_KEY);
+        return raw ? JSON.parse(raw) : [];
+      } catch (err) {
+        return [];
+      }
+    }
+
+    function setDoneChapters(list) {
+      try {
+        localStorage.setItem(DONE_STORAGE_KEY, JSON.stringify(list));
+      } catch (err) {
+        // localStorage unavailable — state just won't persist
+      }
+    }
+
+    function refreshProgressUI() {
+      const done = getDoneChapters();
+      const count = done.filter(ch => allChapterNumbers.includes(ch)).length;
+      const pct = totalChapters ? Math.round((count / totalChapters) * 100) : 0;
+
+      document.getElementById('progressText').textContent = count + ' / ' + totalChapters + ' Chapters Complete';
+      document.getElementById('progressFill').style.width = pct + '%';
+
+      document.querySelectorAll('.chapter-done-btn').forEach(btn => {
+        const ch = btn.getAttribute('data-chapter');
+        const isDone = done.includes(ch);
+        btn.textContent = isDone ? '✓ Completed' : '✓ Mark Complete';
+        btn.classList.toggle('is-marked', isDone);
+        const heading = document.querySelector('.chapter-heading[data-chapter="' + ch + '"]');
+        if (heading) heading.classList.toggle('is-done', isDone);
+        const filterBtn = document.querySelector('#chapterFilter button[data-chapter="' + ch + '"]');
+        if (filterBtn) filterBtn.classList.toggle('is-complete', isDone);
+      });
+    }
+
+    document.querySelectorAll('.chapter-done-btn').forEach(btn => {
+      btn.addEventListener('click', function () {
+        const ch = btn.getAttribute('data-chapter');
+        const done = getDoneChapters();
+        const idx = done.indexOf(ch);
+        if (idx === -1) {
+          done.push(ch);
+        } else {
+          done.splice(idx, 1);
+        }
+        setDoneChapters(done);
+        refreshProgressUI();
+      });
+    });
+
+    document.getElementById('resetDone').addEventListener('click', function () {
+      setDoneChapters([]);
+      refreshProgressUI();
+    });
+
+    refreshProgressUI();
   </script>
 
   <script>
