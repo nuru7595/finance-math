@@ -1,4 +1,4 @@
-const CACHE_NAME = 'finance-formula-sheet-v9';
+const CACHE_NAME = 'finance-formula-sheet-v10';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
